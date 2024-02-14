@@ -3,6 +3,8 @@ import ReactOnRails from 'react-on-rails';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function ClientRouterApp(_props) {
+  console.log('CLIENT', window.location.pathname)
+
   return (
     <BrowserRouter>
       <Routes>

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom'
+import ReactDOMServer from 'react-dom/server';
+import { Route, Routes, redirect } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 import ReactOnRails from 'react-on-rails';
 
@@ -23,28 +24,56 @@ function ServerRouterApp(props, railsContext) {
     location = props.redirectTo
   }
 
+  // if (context.url) {
+    
+  //   redirect(context.url)
+  // }
+
+  const html = ReactDOMServer.renderToString(
+    <StaticRouter location={location} context={context} props={props}>
+      <Routes>
+        <Route
+          path="/inductions"
+          element={<div>Inductions</div>}
+        />
+        <Route
+          path="/stores"
+          element={<div>Stores</div>}
+        />
+        <Route
+          path="/login"
+          element={<div>Login</div>}
+        />
+      </Routes>
+    </StaticRouter>
+  )
+
+  return {
+    renderedHtml: html
+  }
+
   // Important that you don't do this if you are redirecting or have an error.
   // eslint-disable-next-line react/display-name
-  return function ServerRouter() {
-    return (
-      <StaticRouter location={location} context={context}>
-        <Routes>
-          <Route
-            path="/hello_world"
-            element={<div>Inductions</div>}
-          />
-          <Route
-            path="/stores"
-            element={<div>Stores</div>}
-          />
-          <Route
-            path="/login"
-            element={<div>Login</div>}
-          />
-        </Routes>
-      </StaticRouter>
-    );
-  };
+  // return function ServerRouter() {
+  //   return (
+  //     <StaticRouter location={location} context={context}>
+  //       <Routes>
+  //         <Route
+  //           path="/hello_world"
+  //           element={<div>Inductions</div>}
+  //         />
+  //         <Route
+  //           path="/stores"
+  //           element={<div>Stores</div>}
+  //         />
+  //         <Route
+  //           path="/login"
+  //           element={<div>Login</div>}
+  //         />
+  //       </Routes>
+  //     </StaticRouter>
+  //   );
+  // };
 }
 
 export default ServerRouterApp;
