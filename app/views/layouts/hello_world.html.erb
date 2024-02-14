@@ -8,6 +8,6 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= react_component("HelloWorld", props: @hello_world_props, prerender: true) %>
   </body>
 </html>

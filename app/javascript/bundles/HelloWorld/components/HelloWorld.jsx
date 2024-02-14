@@ -1,26 +1,26 @@
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import style from './HelloWorld.module.css';
+import React from 'react';
+import ReactOnRails from 'react-on-rails';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-const HelloWorld = (props) => {
-  const [name, setName] = useState(props.name);
-
+function ClientRouterApp(_props) {
   return (
-    <div>
-      <h3>Hello, {name}!</h3>
-      <hr />
-      <form>
-        <label className={style.bright} htmlFor="name">
-          Say hello to:
-          <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        </label>
-      </form>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/inductions"
+          element={<div>Inductions</div>}
+        />
+        <Route
+          path="/stores"
+          element={<div>Stores</div>}
+        />
+        <Route
+          path="/login"
+          element={<div>Login</div>}
+        />
+      </Routes>
+    </BrowserRouter>
   );
-};
+}
 
-HelloWorld.propTypes = {
-  name: PropTypes.string.isRequired, // this is passed from the Rails view
-};
-
-export default HelloWorld;
+export default ClientRouterApp;
